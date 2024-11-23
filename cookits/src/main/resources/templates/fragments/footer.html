@@ -1,0 +1,168 @@
+<footer th:fragment="footer" class="footer mt-5">
+    <!-- Footer principal -->
+    <div class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row">
+                <!-- Logo y descripción -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3" style="font-family: 'Pacifico', cursive;">
+                        <i class="fas fa-cookie-bite me-2"></i>Cookits
+                    </h5>
+                    <p class="text-muted">
+                        Tu comunidad culinaria donde la inteligencia artificial 
+                        y la pasión por la cocina se encuentran para crear 
+                        experiencias gastronómicas únicas.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <!-- Enlaces rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-uppercase fw-bold mb-3">Explorar</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a th:href="@{/}" class="text-muted text-decoration-none">Inicio</a>
+                        </li>
+                        <li class="mb-2">
+                            <a th:href="@{/recipes}" class="text-muted text-decoration-none">Recetas</a>
+                        </li>
+                        <li class="mb-2">
+                            <a th:href="@{/generator}" class="text-muted text-decoration-none">Generador AI</a>
+                        </li>
+                        <li class="mb-2">
+                            <a th:href="@{/categories}" class="text-muted text-decoration-none">Categorías</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Comunidad -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-uppercase fw-bold mb-3">Comunidad</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a th:href="@{/about}" class="text-muted text-decoration-none">Sobre Nosotros</a>
+                        </li>
+                        <li class="mb-2">
+                            <a th:href="@{/blog}" class="text-muted text-decoration-none">Blog</a>
+                        </li>
+                        <li class="mb-2">
+                            <a th:href="@{/contact}" class="text-muted text-decoration-none">Contacto</a>
+                        </li>
+                        <li class="mb-2">
+                            <a th:href="@{/faq}" class="text-muted text-decoration-none">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-4 mb-4">
+                    <h6 class="text-uppercase fw-bold mb-3">Suscríbete a nuestro Newsletter</h6>
+                    <p class="text-muted mb-3">
+                        Recibe las últimas recetas y consejos culinarios directamente en tu inbox.
+                    </p>
+                    <form class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Tu email" 
+                                   aria-label="Tu email" aria-describedby="button-newsletter">
+                            <button class="btn btn-warning" type="button" id="button-newsletter">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Línea divisoria -->
+            <hr class="my-4 bg-secondary">
+
+            <!-- Copyright y enlaces legales -->
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <span class="text-muted">
+                        © 2024 Cookits. Todos los derechos reservados.
+                    </span>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-muted text-decoration-none me-3">Términos de Uso</a>
+                    <a href="#" class="text-muted text-decoration-none me-3">Privacidad</a>
+                    <a href="#" class="text-muted text-decoration-none">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón volver arriba -->
+    <button id="toTopButton" class="btn btn-warning rounded-circle position-fixed bottom-0 end-0 m-4" 
+            style="display: none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Script para el botón volver arriba -->
+    <script th:inline="javascript">
+        // Mostrar/ocultar botón según el scroll
+        window.onscroll = function() {
+            const button = document.getElementById('toTopButton');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                button.style.display = 'block';
+            } else {
+                button.style.display = 'none';
+            }
+        };
+
+        // Función volver arriba
+        document.getElementById('toTopButton').onclick = function() {
+            document.body.scrollTop = 0; // Para Safari
+            document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+        };
+    </script>
+
+    <!-- Estilos específicos para el footer -->
+    <style>
+        .footer {
+            background-color: #1a1a1a;
+        }
+        
+        .social-links a {
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #ffc107 !important;
+        }
+        
+        #toTopButton {
+            z-index: 1000;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        #toTopButton:hover {
+            opacity: 1;
+        }
+        
+        .btn-warning {
+            background-color: #FF9F1C;
+            border-color: #FF9F1C;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e58e1a;
+            border-color: #e58e1a;
+        }
+        
+        /* Animación para enlaces */
+        .footer a {
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: #FF9F1C !important;
+            text-decoration: none;
+        }
+    </style>
+</footer>

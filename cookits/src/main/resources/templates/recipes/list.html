@@ -1,0 +1,117 @@
+<!-- <div th:replace="fragments/layout :: layout(~{::content})">
+    <div th:fragment="content">
+        <div class="recipes-grid">
+            <div th:each="recipe : ${recipes}">
+                <h3 th:text="${recipe.title}"></h3>
+                <a th:href="@{/recipes/{id}(id=${recipe.id})}">Ver más</a>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Recetas - Cookits</title>
+</head>
+<body>
+    
+    <th:block th:replace="~{fragments/layout :: layout(content='listContent')}">
+        <th:block th:fragment="listContent">
+            <!-- Contenido de la lista de recetas -->
+            <div class="container">
+                <!-- Tu contenido actual aquí -->
+                 <!-- Buscador de recetas -->
+        <div class="search-bar bg-orange-50 p-4 rounded-lg mb-6">
+            <form th:action="@{/recipes}" method="get" class="flex gap-4">
+                <input 
+                    type="text" 
+                    name="search" 
+                    th:value="${param.search}"
+                    class="flex-1 p-2 border rounded-md"
+                    placeholder="Buscar recetas..."
+                >
+                <button type="submit" class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+                    <i class="fas fa-search me-2"></i>Buscar
+                </button>
+            </form>
+        </div>
+
+        <!-- Botón para crear nueva receta -->
+        <div class="mb-6 text-right">
+            <a th:href="@{/recipes/create}" class="inline-block px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+                <i class="fas fa-plus me-2"></i>Nueva Receta
+            </a>
+        </div>
+
+        <!-- Grid de recetas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div th:each="recipe : ${recipes}" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                <div class="relative pb-[60%]">
+                    <img 
+                        th:if="${recipe.imageUrl}"
+                        th:src="${recipe.imageUrl}"
+                        th:alt="${recipe.title}"
+                        class="absolute inset-0 w-full h-full object-cover"
+                    >
+                    <div th:unless="${recipe.imageUrl}" class="absolute inset-0 bg-gray-200 flex items-center justify-center">
+                        <i class="fas fa-utensils text-4xl text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4">
+                    <h3 class="text-xl font-bold mb-2" th:text="${recipe.title}">Título de la Receta</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2" th:text="${recipe.description}">Descripción</p>
+                    
+                    <div class="flex items-center justify-between text-sm text-gray-500">
+                        <span>
+                            <i class="fas fa-user me-1"></i>
+                            <span th:text="${recipe.author.nombre}">Autor</span>
+                        </span>
+                        <span>
+                            <i class="fas fa-heart me-1"></i>
+                            <span th:text="${recipe.likes}">0</span> likes
+                        </span>
+                    </div>
+                    
+                    <a th:href="@{/recipes/{id}(id=${recipe.id})}" 
+                       class="mt-4 block text-center py-2 bg-orange-500 text-white rounded hover:bg-orange-600">
+                        Ver Receta
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paginación -->
+        <div class="mt-6 flex justify-center" th:if="${recipes.totalPages > 1}">
+            <nav aria-label="Navegación de páginas">
+                <ul class="flex gap-2">
+                    <li>
+                        <a th:if="${recipes.hasPrevious()}"
+                           th:href="@{/recipes(page=${recipes.number - 1}, search=${param.search})}"
+                           class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li th:each="pageNum : ${#numbers.sequence(0, recipes.totalPages - 1)}">
+                        <a th:href="@{/recipes(page=${pageNum}, search=${param.search})}"
+                           th:text="${pageNum + 1}"
+                           th:class="${pageNum == recipes.number ? 'px-3 py-1 bg-orange-500 text-white rounded' : 'px-3 py-1 bg-gray-200 rounded hover:bg-gray-300'}">
+                        </a>
+                    </li>
+                    <li>
+                        <a th:if="${recipes.hasNext()}"
+                           th:href="@{/recipes(page=${recipes.number + 1}, search=${param.search})}"
+                           class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</th:block>
+</body>
+</html>

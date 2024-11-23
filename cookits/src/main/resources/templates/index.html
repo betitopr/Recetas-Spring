@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Inicio - Cookits</title>
+</head>
+<body>
+    <th:block th:replace="~{fragments/layout :: layout(content=${'indexContent'})}">
+        <th:block th:fragment="indexContent">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center">
+                        <p th:if="${username != null}">¡Bienvenido, <span th:text="${username}">Usuario</span>!</p>
+                        <p class="lead">Tu comunidad culinaria donde la IA y la cocina se encuentran</p>
+                    </div>
+                </div>
+                <!-- Resto del contenido -->
+            </div>
+        </section>
+    </th:block>
+    </th:block>
+    <script>
+        console.log('Page loaded');
+    </script>
+</body>
+</html>

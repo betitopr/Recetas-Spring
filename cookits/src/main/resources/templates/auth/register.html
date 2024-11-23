@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro - Cookits</title>
+</head>
+<body>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card mt-5">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-4">Crear Cuenta</h2>
+                            
+                            <form th:action="@{/auth/register}" method="post" th:object="${user}">
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" 
+                                           th:field="*{nombre}" required>
+                                    <div th:if="${#fields.hasErrors('nombre')}" class="text-danger">
+                                        <span th:errors="*{nombre}"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="apellido" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellido" 
+                                           th:field="*{apellido}" required>
+                                    <div th:if="${#fields.hasErrors('apellido')}" class="text-danger">
+                                        <span th:errors="*{apellido}"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" 
+                                           th:field="*{email}" required>
+                                    <div th:if="${#fields.hasErrors('email')}" class="text-danger">
+                                        <span th:errors="*{email}"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="password" 
+                                           th:field="*{password}" required>
+                                    <div th:if="${#fields.hasErrors('password')}" class="text-danger">
+                                        <span th:errors="*{password}"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">
+                                        Registrarse
+                                    </button>
+                                </div>
+                            </form>
+                            
+                            <div class="text-center mt-3">
+                                <p>¿Ya tienes cuenta? 
+                                    <a th:href="@{/auth/login}">Inicia sesión aquí</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

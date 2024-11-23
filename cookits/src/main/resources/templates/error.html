@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error - Cookits</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <div class="error-message">
+            <h1>¡Ups! Algo salió mal</h1>
+            <p th:text="${error}">Mensaje de error</p>
+            <a href="/" class="button">Volver al inicio</a>
+        </div>
+    </div>
+</body>
+</html>
